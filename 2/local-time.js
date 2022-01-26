@@ -13,7 +13,7 @@ class LocalTime extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ['utc-timestamp', 'show'];
+		return ['utc-timestamp', 'time-style', 'date-style', 'timer'];
 	}
 
 	get utcTimestamp() {
@@ -24,12 +24,28 @@ class LocalTime extends HTMLElement {
 		this.setAttribute('utc-timestamp', val);
 	}
 
-	get show() {
-		return this.getAttribute('show');
+	get timer() {
+		return this.getAttribute('timer');
 	}
 
-	set show(val) { // reflect property value changes back into the DOM
-		this.setAttribute('show', val);
+	set timer(val) { // reflect property value changes back into the DOM
+		this.setAttribute('timer', val);
+	}
+
+	get timeStyle() {
+		return this.getAttribute('time-style');
+	}
+
+	set timeStyle(val) { // reflect property value changes back into the DOM
+		this.setAttribute('time-style', val);
+	}
+
+	get dateStyle() {
+		return this.getAttribute('date-style');
+	}
+
+	set dateStyle(val) { // reflect property value changes back into the DOM
+		this.setAttribute('date-style', val);
 	}
 
 	convertTime() {
@@ -40,8 +56,12 @@ class LocalTime extends HTMLElement {
 
 	connectedCallback() {
 		console.log('connectedCallback hit');
-		this._upgradeProperty('source-time'); // assign the attribute value to the property
-		this._upgradeProperty('show'); // assign the attribute value to the property
+
+		// checking if any properties have already been set on the instance already, and assigning the attribute value to the property
+		this._upgradeProperty('utc-timestamp');
+		this._upgradeProperty('date-style');
+		this._upgradeProperty('time-style');
+		this._upgradeProperty('timer');
 
 		const template = document.createElement('template');
 		template.innerHTML = `

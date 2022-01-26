@@ -10,6 +10,38 @@
 </head>
 <body>
 	<h1>Local Time</h1>
-	<p>This component takes a <abbr title="Universal Co-ordinated Time">UTC</abbr> timestamp and displays it in the visitors local time. It displays inline as normal text: <local-time utc-timestamp="2022-01-20T10:00:00Z" show="date-and-time"></local-time>. I can't wait for the new Temporal features of native Javascript, because this Date object and methods are really long in the tooth and rough.</p>
+	<p>
+		This component takes a <abbr title="Universal Co-ordinated Time">UTC</abbr> timestamp and displays it inline as the visitors local time. Internally is it using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString">JavaScript's <code>toLocaleString</code> method</a> and the display options use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">DateTimeFormat</a>:
+		<local-time
+			utc-timestamp="2022-01-20T10:00:00Z"
+			time-style="long"
+			date-style="numeric"
+			timer
+		></local-time>.
+	</p>
+	<p>
+		The following settings can be configured:
+	</p>
+	<ul>
+		<li>
+			<code>utc-timestamp</code> - The UTC timestamp to display in standard format. e.g., <code>2022-01-20T10:00:00Z</code>
+		</li>
+		<li>
+			<code>time-style</code> - full, long, medium, short. No attribute will omit the time from the output.
+		</li>
+		<li>
+			<code>date-style</code> - full, long, medium, short. No attribute will omit the time from the output.
+		</li>
+	</ul>
+	<p>
+
+	<p>I can't wait for the new Temporal features of native Javascript, because this Date object and methods are really long in the tooth and rough.</p>
+
+	<h2>References</h2>
+	<ul>
+		<li>
+			<a href="https://googlechromelabs.github.io/howto-components/howto-tabs/#demo">howto-tabs</a>
+		</li>
+	</ul>
 </body>
 </html>
